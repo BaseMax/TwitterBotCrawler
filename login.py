@@ -28,6 +28,7 @@ if username_box and password_box and button:
 	button.click()
 
 	'''
+	verify_box = browser.find_element_by_xpath('//*[@id="challenge_response"]')
 	if verify_box:
 		# py 3 or 2.7?
 		verify = input("Enter SMS Code: ")
