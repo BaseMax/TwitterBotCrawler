@@ -17,7 +17,9 @@ class State(enum.Enum):
 state=State.OPEN # default
 
 def coin():
-	return
+	check_pay = True
+	if check_pay:
+		push()
 
 def push():
 	global state
@@ -27,9 +29,9 @@ def push():
 		state=State.LOCKED
 
 print(state)
-push()
+coin()
 print(state)
-push()
+coin()
 print(state)
-push()
+coin()
 print(state)
