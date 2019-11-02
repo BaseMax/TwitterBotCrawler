@@ -27,6 +27,7 @@ def browser():
 	state=State.LOGGEDOUT
 
 def logout():
+	global state
 	print("[LOG] Logout")
 	try:
 		browser.get('https://twitter.com/logout')
@@ -37,6 +38,7 @@ def logout():
 		state=State.NOBROWSER
 
 def login():
+	global state
 	print("[LOG] Login")
 	try:
 		browser.get('https://twitter.com/login?lang=en-gb')
@@ -54,7 +56,9 @@ def login():
 			# password_box.send_keys(password + Keys.RETURN)
 			password_box.send_keys(password)
 			button.click()
-
+			# Need to check you are loginned or not!
+			# auth()
+			state=State.LOGGEDIN
 			'''
 			verify_box = browser.find_element_by_xpath('//*[@id="challenge_response"]')
 			if verify_box:
@@ -84,11 +88,22 @@ def login():
 		print("[ERR] Browser problem!")
 		state=State.NOBROWSER
 
+def process():
+	return
+
+isProcess=False
 while True:
 	if state == State.NOBROWSER:
+		isProcess=False
 		browser()
 	elif state == State.LOGGEDOUT:
+		isProcess=False
 		login()
+	elif state == State.LOGGEDIN:
+		if isProcess == False:
+			isProcess=True
+			print("[LOG] Process Twitter")
+		process()
 	# command=input("> ")
 	# print(command)
 	# if command == "login":
