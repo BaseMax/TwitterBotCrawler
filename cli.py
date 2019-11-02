@@ -15,6 +15,7 @@ class State(enum.Enum):
 	NOBROWSER = 0
 	LOGGEDIN = 1
 	LOGGEDOUT = 2
+	FINISHED = 3
 
 # default setting
 state=State.NOBROWSER
@@ -22,9 +23,13 @@ state=State.NOBROWSER
 def browser():
 	global browser
 	global state
+	global webdriver
 	print("[LOG] Open Browser")
-	browser = webdriver.Firefox()
-	state=State.LOGGEDOUT
+	try:
+		browser = webdriver.Firefox()
+		state=State.LOGGEDOUT
+	except:
+		return
 
 def logout():
 	global state
@@ -89,21 +94,20 @@ def login():
 		state=State.NOBROWSER
 
 def process():
-	return
+	global state
+	print("[LOG] Process Twitter")
+	# Put your codes here...
+	state=State.FINISHED
 
-isProcess=False
 while True:
 	if state == State.NOBROWSER:
-		isProcess=False
 		browser()
 	elif state == State.LOGGEDOUT:
-		isProcess=False
 		login()
 	elif state == State.LOGGEDIN:
-		if isProcess == False:
-			isProcess=True
-			print("[LOG] Process Twitter")
 		process()
+	elif state == State.FINISHED:
+		exit()
 	# command=input("> ")
 	# print(command)
 	# if command == "login":
