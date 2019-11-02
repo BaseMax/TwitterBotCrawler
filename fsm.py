@@ -8,17 +8,28 @@ Please see LICENSE for details
 All rights reserved.
 '''
 
-state=False #default
+import enum
+
+class State(enum.Enum):
+	OPEN = 0
+	LOCKED = 1
+
+state=State.OPEN # default
+
+def coin():
+	return
+
 def push():
 	global state
-	if state == False:
-		state=True
+	if state == State.LOCKED:
+		state=State.OPEN
 	else:
-		state=False
+		state=State.LOCKED
 
 print(state)
 push()
 print(state)
 push()
 print(state)
-
+push()
+print(state)
