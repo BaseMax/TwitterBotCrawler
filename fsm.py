@@ -8,15 +8,17 @@ Please see LICENSE for details
 All rights reserved.
 '''
 
-status=False #default
+state=False #default
 def push():
-	global status
-	if status == False:
-		status=True
+	global state
+	if state == False:
+		state=True
 	else:
-		status=False
+		state=False
 
-print(status)
+print(state)
 push()
-print(status)
+print(state)
+push()
+print(state)
 
