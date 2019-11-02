@@ -16,14 +16,18 @@ class State(enum.Enum):
 	LOGGEDIN = 1
 	LOGGEDOUT = 2
 
-def browser():
-	print("[LOG] Open Browser")
-	global browser
-	browser = webdriver.Firefox()
+# default setting
+state=State.NOBROWSER
 
-browser()
+def browser():
+	global browser
+	global state
+	print("[LOG] Open Browser")
+	browser = webdriver.Firefox()
+	state=State.LOGGEDOUT
 
 def logout():
+	print("[LOG] Logout")
 	try:
 		browser.get('https://twitter.com/logout')
 		button = browser.find_element_by_xpath('//*[@id="react-root"]/div/div/div[1]/div/div/div/div/div[2]/div[2]/div[3]/div[2]')
@@ -34,6 +38,7 @@ def logout():
 		logout()
 
 def login():
+	print("[LOG] Login")
 	try:
 		browser.get('https://twitter.com/login?lang=en-gb')
 
@@ -82,11 +87,15 @@ def login():
 		login()
 
 while True:
-	command=input("> ")
-	print(command)
-	if command == "login":
+	if state == State.NOBROWSER:
+		browser()
+	elif state == State.LOGGEDOUT:
 		login()
-	elif command == "logout":
-		logout()
-	else:
-		print("Error!")
+	# command=input("> ")
+	# print(command)
+	# if command == "login":
+	# 	login()
+	# elif command == "logout":
+	# 	logout()
+	# else:
+	# 	print("Error!")
