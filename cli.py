@@ -34,8 +34,7 @@ def logout():
 		button.click()
 	except:
 		print("[ERR] Browser problem!")
-		browser()
-		logout()
+		state=State.NOBROWSER
 
 def login():
 	print("[LOG] Login")
@@ -83,8 +82,7 @@ def login():
 			print("We have problem to detect login page!")
 	except:
 		print("[ERR] Browser problem!")
-		browser()
-		login()
+		state=State.NOBROWSER
 
 while True:
 	if state == State.NOBROWSER:
