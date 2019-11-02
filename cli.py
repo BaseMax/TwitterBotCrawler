@@ -64,29 +64,6 @@ def login():
 			# Need to check you are loginned or not!
 			# auth()
 			state=State.LOGGEDIN
-			'''
-			verify_box = browser.find_element_by_xpath('//*[@id="challenge_response"]')
-			if verify_box:
-				# py 3 or 2.7?
-				verify = input("Enter SMS Code: ")
-				print(verify)
-				verify_box.send_keys(verify)
-			'''
-
-			'''
-			try:
-				verify_box = WebDriverWait(driver, 20).until(
-					browser.presence_of_element_located((By.XPATH, '//*[@id="challenge_response"]'))
-				)
-			finally:
-				if verify_box:
-					# py 3 or 2.7?
-					verify = input("Enter SMS Code: ")
-					print(verify)
-					verify_box.send_keys(verify)
-			'''
-
-			# browser.quit()
 		else:
 			print("We have problem to detect login page!")
 	except:
@@ -99,6 +76,14 @@ def process():
 	# Put your codes here...
 	state=State.FINISHED
 
+def quit():
+	try:
+		browser.quit()
+		exit()
+	except:
+		exit()
+		return
+
 while True:
 	if state == State.NOBROWSER:
 		browser()
@@ -107,7 +92,7 @@ while True:
 	elif state == State.LOGGEDIN:
 		process()
 	elif state == State.FINISHED:
-		exit()
+		quit()
 	# command=input("> ")
 	# print(command)
 	# if command == "login":
