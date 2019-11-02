@@ -16,18 +16,22 @@ class State(enum.Enum):
 
 # default setting
 state=State.OPEN
-price=30
+# price=30
 
 # Pay Money
 def coin():
-	global price
 	global state
-	if price > 10:
-		price=price-10
+	# global price
+	# if price > 10:
+	# 	price=price-10
+	# 	state = State.OPEN
+	# 	push()
+	# else:
+	# 	print("You not have money, Charge it!")
+	if state == State.LOCKED:
 		state = State.OPEN
-		push()
 	else:
-		print("You not have money, Charge it!")
+		return
 
 # Cross the road
 def push():
