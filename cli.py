@@ -12,8 +12,9 @@ from selenium.webdriver.common.keys import Keys
 import enum
 
 class State(enum.Enum):
-	OPEN = 0
-	LOCKED = 1
+	NOBROWSER = 0
+	LOGGEDIN = 1
+	LOGGEDOUT = 2
 
 def browser():
 	print("[LOG] Open Browser")
